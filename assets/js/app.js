@@ -58,6 +58,10 @@ function successHandle(statesData) {
 
     // Step 5: Create Circles
     // ==============================
+    // xaxis -- in poverty, age(median), household income(median)
+    // yaxis -- obese (%), smokes (%), lacks healthcare (%)
+
+
     var circlesGroup = chartGroup.selectAll("circle")
         .data(statesData)
         .enter()
@@ -83,7 +87,7 @@ function successHandle(statesData) {
         .attr("class", "tooltip")
         .offset([80, -60])
         .html(function(d) {
-            return (`${d.state}<br>Poverty: ${d.poverty}<br>Lacks Healthcare: ${d.healthcare}`);
+            return (`${d.state}<br>Poverty: ${d.poverty}%<br>Lacks Healthcare: ${d.healthcare}%`);
         });
 
     // Step 7: Create tooltip in the chart
@@ -92,7 +96,7 @@ function successHandle(statesData) {
 
     // Step 8: Create event listeners to display and hide the tooltip
     // ==============================
-    circlesGroup.on("click", function(data) {
+    circlesGroup.on("mouseover", function(data) {
         toolTip.show(data, this);
     })
     // onmouseout event
