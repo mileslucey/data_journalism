@@ -77,7 +77,7 @@ function successHandle(statesData) {
         .append("circle")
         .attr("cx", d => xLinearScale(d.poverty))
         .attr("cy", d => yLinearScale(d.healthcare))
-        .attr("r", "10")
+        .attr("r", "12")
         .attr("fill", "#668b8b")
         .attr("opacity", ".8")
 
@@ -87,7 +87,7 @@ function successHandle(statesData) {
         .append("text")
         .attr("x", d => xLinearScale(d.poverty))
         .attr("y", d => yLinearScale(d.healthcare))
-        .style("font-size", "10px")
+        .style("font-size", "11px")
         .style("text-anchor", "middle")
         .style('fill', 'white')
         .text(d => (d.abbr));
