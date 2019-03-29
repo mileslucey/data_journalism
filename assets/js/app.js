@@ -1,7 +1,9 @@
 // @TODO: YOUR CODE HERE!
+// Define the size of the graph
 var svgWidth = 900;
 var svgHeight = 500;
 
+// Define the margin sizes
 var margin = {
     top: 10,
     right: 100,
@@ -9,9 +11,11 @@ var margin = {
     left: 40
 };
 
+// Establish the width and height of the graph
 var width = svgWidth - margin.left - margin.right;
 var height = svgHeight - margin.top - margin.bottom;
 
+// Establish the SVG object
 var svg = d3.select("#scatter")
     .append("svg")
     .attr("width", svgWidth)
@@ -20,22 +24,29 @@ var svg = d3.select("#scatter")
 var chartGroup = svg.append("g")
     .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
+// Import data
 var file = "assets/data/data.csv"
 
+// Load data with both a success and error handler
 d3.csv(file).then(successHandle, errorHandle);
 
+// Error handler
 function errorHandle(error) {
     throw err;
 }
 
+// Success handler
 function successHandle(statesData) {
 
-    // Loop through the data and pass argument data
+    // / Step 1: Parse Data/Cast as numbers
+    // ==============================
     statesData.map(function (data) {
         data.poverty = +data.poverty;
         data.healthcare = +data.healthcare;
     });
 
+    // Step 2: Create scale functions
+    // ==============================
     var xLinearScale = d3.scaleLinear()
         .domain([8.5, d3.max(statesData, d => d.poverty)])
         .range([0, width]);
@@ -44,6 +55,8 @@ function successHandle(statesData) {
         .domain([3, d3.max(statesData, d => d.healthcare)])
         .range([height, 0]);
 
+    // Step 3: Create axis functions
+    // ==============================
     var bottomAxis = d3.axisBottom(xLinearScale);
     var leftAxis = d3.axisLeft(yLinearScale);
 
@@ -58,10 +71,6 @@ function successHandle(statesData) {
 
     // Step 5: Create Circles
     // ==============================
-    // xaxis -- in poverty, age(median), household income(median)
-    // yaxis -- obese (%), smokes (%), lacks healthcare (%)
-
-
     var circlesGroup = chartGroup.selectAll("circle")
         .data(statesData)
         .enter()
@@ -83,6 +92,8 @@ function successHandle(statesData) {
         .style('fill', 'white')
         .text(d => (d.abbr));
 
+    // Step 6: Initialize tool tip
+    // ==============================
     var toolTip = d3.tip()
         .attr("class", "tooltip")
         .offset([80, -60])
