@@ -3,10 +3,10 @@ var svgWidth = 900;
 var svgHeight = 500;
 
 var margin = {
-    top: 50,
-    right: 50,
-    bottom: 90,
-    left: 90
+    top: 10,
+    right: 100,
+    bottom: 40,
+    left: 40
 };
 
 var width = svgWidth - margin.left - margin.right;
@@ -103,14 +103,14 @@ function successHandle(statesData) {
     // Create axes labels
     chartGroup.append("text")
         .attr("transform", "rotate(-90)")
-        .attr("y", 0 - margin.left + 20)
+        .attr("y", 0 - margin.left)
         .attr("x", 0 - (height / 2))
         .attr("dy", "1em")
         .attr("class", "axisText")
         .text("Lacks Healthcare(%)");
 
     chartGroup.append("text")
-        .attr("transform", `translate(${width / 2}, ${height + margin.top + 5})`)
+        .attr("transform", `translate(${width / 2}, ${height + margin.top + 25})`)
         .attr("class", "axisText")
         .text("In Poverty (%)");
 }
