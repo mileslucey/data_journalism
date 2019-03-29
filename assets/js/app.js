@@ -1,4 +1,5 @@
 // @TODO: YOUR CODE HERE!
+"use strict";
 // Define the size of the graph
 var svgWidth = 900;
 var svgHeight = 500;
